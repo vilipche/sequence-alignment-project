@@ -48,25 +48,33 @@ def nb_alignements_possibles(x,y,k_x):
 
     #print("Tous les mots de Y_gap: {}\n{}".format(len(mots_de_y_gap),mots_de_y_gap))
 
-    print("Mots y gap:", len(mots_de_y_gap))
+    print("Nb des mots possibles y gap:", len(mots_de_y_gap))
     
-    y_aligne = []
+
     #eviter les gaps doublant
+    #y_aligne = []
+    alignement = {}
+    
     for motX in mots_de_x_gap:
+        alignement[motX] = [] #creation d'une liste pour stocker tous les alignements entre un motX et les motY respectif
         for motY in mots_de_y_gap:
             ajouter = True
             for i in range(len(motX)):
-                if(motX[i]=="-" and motY[i]=="-"):
+                if(motX[i]=="-" and motY[i]=="-"): #pour eviter l'occurence des gaps dans les memes positions
                     ajouter = False
                     break
-            if(motY not in y_aligne and ajouter == True):
-                y_aligne.append(motY)
-           
-    #print("Total alignements de Y_gap: {}".format(len(y_aligne)))
-    print(len(y_aligne))
-    #print(y_aligne)     
+            if(motY not in alignement[motX] and ajouter == True):
+                alignement[motX].append(motY)
+            # if(motY not in y_aligne and ajouter == True):
+            #     y_aligne.append(motY)
+
+    total_alignements = 0
+    for v in alignement.keys():
+        print("{} : {}".format(v,len(alignement[v])))
+        total_alignements+=len(alignement[v])
+    print("Au total il y a {} alignements pour un couple (x,y)".format(total_alignements))
     
-    return len(y_aligne)
+    return total_alignements
 
 
 def creation_gap(mot, k):
@@ -83,4 +91,4 @@ y = "gtcgtcgtcg"
 # y_gap = ""
 
 nb_alignements_possibles(x,y,k_x)
-
+#nb_alignements_possibles("ABC","DK",1)
