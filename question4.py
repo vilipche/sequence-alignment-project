@@ -72,6 +72,7 @@ def nb_alignements_possibles(x,y,k_x):
     for v in alignement.keys():
         print("{} : {}".format(v,len(alignement[v])))
         total_alignements+=len(alignement[v])
+        #print(alignement[v])
     print("Au total il y a {} alignements pour un couple (x,y)".format(total_alignements))
     
     return total_alignements
@@ -91,4 +92,4 @@ y = "gtcgtcgtcg"
 # y_gap = ""
 
 nb_alignements_possibles(x,y,k_x)
-#nb_alignements_possibles("ABC","DK",1)
+#nb_alignements_possibles("ABCD","AB",2)

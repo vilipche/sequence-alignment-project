@@ -1,7 +1,7 @@
 # x = ['A','C','T','G','C','C','T','G']
 # y = ['C','G','A','T','T','T','G','C','A','T']
-# x = ['A','C','A','A']
-# y = ['A','C','T','G','T']
+#  x = ['C','A','G']
+#  y = ['C','A','T','G']
 def c_sub(x,y):
     if(x==y):
         return 0
@@ -29,19 +29,17 @@ def DIST_NAIF_REC(x,y,i,j,c,dist):
         c le cout d'alignement de (xi,yj)
         dist le cout de meilleur alignement connu
     """
-    
     if(i==len(x) and j==len(y)):
         if(c<dist):
             dist = c
     else:
         if(i<len(x) and j<len(y)):
-            dist = DIST_NAIF_REC(x, y, i+1, j+1, c+c_sub(x[i], y[j]), dist) #i+1 j+1 e vo zadacata, ama dava exception taka
-        else:
-            if(i<len(x)):
-                dist = DIST_NAIF_REC(x, y, i+1, j, c+c_del, dist)
-            if(j<len(y)):
-                dist = DIST_NAIF_REC(x, y, i, j+1, c+c_ins, dist)
-    
+            dist = DIST_NAIF_REC(x, y, i+1, j+1, c+c_sub(x[i], y[j]), dist) 
+        if(i<len(x)):
+            dist = DIST_NAIF_REC(x, y, i+1, j, c+c_del, dist)
+        if(j<len(y)):
+            dist = DIST_NAIF_REC(x, y, i, j+1, c+c_ins, dist)
+
     return dist    
 
 def readFile(p):
@@ -69,9 +67,8 @@ def readFile(p):
 
 
 x,y = readFile("./Inst_0000010_44.adn")
-print(DIST_NAIF(x,y)) #treba 10 da vrati
+print(DIST_NAIF(x,y)) #10
 x,y = readFile("./Inst_0000010_7.adn")
-print(DIST_NAIF(x,y)) #treba 8 da vrati
+print(DIST_NAIF(x,y)) #8
 x,y = readFile("./Inst_0000010_8.adn")
-print(DIST_NAIF(x,y)) #treba 2 da vrati
-
+print(DIST_NAIF(x,y)) #2
