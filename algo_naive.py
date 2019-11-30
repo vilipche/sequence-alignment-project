@@ -1,7 +1,4 @@
-# x = ['A','C','T','G','C','C','T','G']
-# y = ['C','G','A','T','T','T','G','C','A','T']
-#  x = ['C','A','G']
-#  y = ['C','A','T','G']
+
 def c_sub(x,y):
     if(x==y):
         return 0
@@ -66,9 +63,13 @@ def readFile(p):
     f.close()
 
 
-x,y = readFile("./Inst_0000010_44.adn")
-print(DIST_NAIF(x,y)) #10
-x,y = readFile("./Inst_0000010_7.adn")
-print(DIST_NAIF(x,y)) #8
-x,y = readFile("./Inst_0000010_8.adn")
-print(DIST_NAIF(x,y)) #2
+# x,y = readFile("./Inst_0000010_44.adn")
+# print(DIST_NAIF(x,y)) #10
+# x,y = readFile("./Inst_0000010_7.adn")
+# print(DIST_NAIF(x,y)) #8
+# x,y = readFile("./Inst_0000010_8.adn")
+# print(DIST_NAIF(x,y)) #2
+
+
+
+

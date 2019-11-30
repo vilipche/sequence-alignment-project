@@ -55,7 +55,7 @@ c_del = 2
 c_ins = 2
 T=None
 
-def DEST_1(x,y):
+def DIST_1(x,y):
     n=len(x)
     m=len(y)
 
@@ -73,12 +73,13 @@ def DEST_1(x,y):
     
     for i in range(1, n+1):
         for j in range(1, m+1):
-            T[i][j] = min(T[i-1][j] + c_ins, T[i][j-1] + c_del, T[i-1][j-1] + c_sub(x[i-1],y[j-1]))
+            T[i][j] = min(T[i-1][j] + c_del, T[i][j-1] + c_ins, T[i-1][j-1] + c_sub(x[i-1],y[j-1]))
+
     printMatrice(T,x,y)
     return T[n][m]
 
 
-def DEST_2(x,y):
+def DIST_2(x,y):
     n=len(x)
     m=len(y)
     #listeAjouter = [0 for i in range(m+1)]
@@ -137,7 +138,7 @@ def SOL_1(T,x,y):
 
 def PROG_DYN(x,y):
     print("x:\n{}\ny:\n{}".format(x,y))
-    d = DEST_1(x,y)
+    d = DIST_1(x,y)
     printMatrice(T,x,y)
     print("Distance d(x,y) = {}".format(d))
     a_x, a_y = SOL_1(T,x,y)
@@ -176,12 +177,13 @@ def align_lettre_mot(x,y):
 # x,y = readFile("./Inst_0000010_44.adn")
 # DEST_1(x,y)
 
-# x,y = readFile("./Inst_0000010_7.adn")
+x,y = readFile("./Inst_0000010_7.adn")
 
-x,y = readFile("./Inst_0000010_8.adn")
+# x,y = readFile("./Inst_0000010_8.adn")
 # DEST_1(x,y)
 
-# DEST_1(x,y)
+# DIST_1(x,y)
 # SOL_1(T,x,y)
-# PROG_DYN(x,y)
-print(DEST_2(x,y))
+PROG_DYN(x,y)
+# DIST_2(x,y)
+print(DIST_2(x,y))
