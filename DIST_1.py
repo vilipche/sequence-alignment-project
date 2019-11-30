@@ -149,27 +149,25 @@ def mot_gaps(k):
     return ['-'] * k
 
 def align_lettre_mot(x,y):
-    mot_x = ['-' for i in range(len(y))]
+    mot_x = mot_gaps(len(y))
     cout = float("inf")
     indice = 0
     for i in range(len(y)):
         if(x==y[i]): #si a=b
             indice = i
             break
-        elif(y[i]=='-'):
-            if(c_ins<cout):
-                cout=c_ins
-                indice = i
         else:
             if(c_sub(x,y[i])<cout):
                 cout=c_sub(x,y[i])
                 indice = i
 
-        mot_x[indice] = x
-        return mot_x
+    mot_x[indice] = x
+    return mot_x, y
+    
 
-
-
+def SOL_2(x,y):
+    if(len(x) == 1 and len(y) == 1):
+        
 
 # print(DEST_1(T,x,y))
 # printMatrice(T,x,y)
@@ -177,13 +175,13 @@ def align_lettre_mot(x,y):
 # x,y = readFile("./Inst_0000010_44.adn")
 # DEST_1(x,y)
 
-x,y = readFile("./Inst_0000010_7.adn")
+# x,y = readFile("./Inst_0000010_7.adn")
 
 # x,y = readFile("./Inst_0000010_8.adn")
 # DEST_1(x,y)
 
 # DIST_1(x,y)
 # SOL_1(T,x,y)
-PROG_DYN(x,y)
+# PROG_DYN(x,y)
 # DIST_2(x,y)
-print(DIST_2(x,y))
+# print(DIST_2(x,y))
