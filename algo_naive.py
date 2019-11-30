@@ -15,8 +15,8 @@ def DIST_NAIF(x,y):
         x et y sont deux listes
         retourne la distance des mots x et y
     """
-    print(x)
-    print(y)
+    # print(x)
+    # print(y)
     return DIST_NAIF_REC(x,y,0,0,0,float("inf"))
 
     
