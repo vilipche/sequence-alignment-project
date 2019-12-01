@@ -166,8 +166,60 @@ def align_lettre_mot(x,y):
     
 
 def SOL_2(x,y):
-    if(len(x) == 1 and len(y) == 1):
-        
+    pass
+
+"""
+
+D = [ [ 0 for j in range(len(y)+1)] for i in range(2)]
+    for j in range(1,m+1):
+        D[0][j] = c_ins*j
+    
+    for i in range(1,n+1):
+        D[1][0] = c_del*i
+        for j in range(1,m+1):
+            D[1][j] = min(D[0][j] + c_ins, D[1][j-1] + c_del, D[0][j-1] + c_sub(x[i-1],y[j-1]))
+        if(i!=n):
+            # D.pop(0) #remove first row
+            # D.append(listeAjouter.copy) #memory complexity???
+            D[0], D[1] = D[1], D[0]
+
+    return D[1][-1]
+
+    """
+
+def coupure(x,y):
+    n = len(x)
+    m = len(y)
+    iStar = abs(n) // 2
+
+    D = [ [ 0 for j in range(len(y)+1)] for i in range(2)]
+    I = [ 0 for j in range(len(y)+1)] 
+
+    for j in range(1,m+1):
+        D[0][j] = c_ins*j
+        I[j] = j #initialisation 0 1 2 3 4 5
+
+    for i in range(1,n+1):
+        D[1][0] = c_del*i
+        print(I)
+        for j in range(1,m+1):
+            D[1][j] = min(D[0][j] + c_ins, D[1][j-1] + c_del, D[0][j-1] + c_sub(x[i-1],y[j-1]))
+            if(i>=iStar):
+                if(D[1][j] == D[0][j-1] + c_sub(x[i-1],y[i-1])):
+                    I[j] -= 1
+                elif(D[1][j] == D[1][j-1] + c_del):
+                    I[j] -= 1
+
+
+        if(i!=n):
+            # D.pop(0) #remove first row
+            # D.append(listeAjouter.copy) #memory complexity???
+            D[0], D[1] = D[1], D[0]
+
+
+coupure("ATTGTA","ATCTTA")
+
+
 
 # print(DEST_1(T,x,y))
 # printMatrice(T,x,y)
