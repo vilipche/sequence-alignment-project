@@ -1,6 +1,3 @@
-x=['G','T','C','A']
-y=['G','T','C']
-
 
 def readFile(p):
     f = open(p, "r")
