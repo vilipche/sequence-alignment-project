@@ -161,28 +161,10 @@ def align_lettre_mot(x,y):
     mot_x[indice] = x
     return mot_x, y
     
+XA = []
+YA = []
 
-def SOL_2(x,y):
-    pass
 
-"""
-
-D = [ [ 0 for j in range(len(y)+1)] for i in range(2)]
-    for j in range(1,m+1):
-        D[0][j] = c_ins*j
-    
-    for i in range(1,n+1):
-        D[1][0] = c_del*i
-        for j in range(1,m+1):
-            D[1][j] = min(D[0][j] + c_ins, D[1][j-1] + c_del, D[0][j-1] + c_sub(x[i-1],y[j-1]))
-        if(i!=n):
-            # D.pop(0) #remove first row
-            # D.append(listeAjouter.copy) #memory complexity???
-            D[0], D[1] = D[1], D[0]
-
-    return D[1][-1]
-
-    """
 
 def coupure(x,y):
     n = len(x)
@@ -190,34 +172,71 @@ def coupure(x,y):
     iStar = abs(n) // 2
 
     D = [ [ 0 for j in range(len(y)+1)] for i in range(2)]
-    I = [ 0 for j in range(len(y)+1)] 
+    I = [ [ 0 for j in range(len(y)+1)] for i in range(2)] 
 
     for j in range(1,m+1):
         D[0][j] = c_ins*j
-        I[j] = j #initialisation 0 1 2 3 4 5
+        I[0][j] = j #initialisation 0 1 2 3 4 5
 
     for i in range(1,n+1):
         D[1][0] = c_del*i
-        print(I)
+        I[1][0] = 0
         for j in range(1,m+1):
             D[1][j] = min(D[0][j] + c_ins, D[1][j-1] + c_del, D[0][j-1] + c_sub(x[i-1],y[j-1]))
-            if(i>=iStar):
-                if(D[1][j] == D[0][j-1] + c_sub(x[i-1],y[i-1])):
-                    I[j] -= 1
-                elif(D[1][j] == D[1][j-1] + c_del):
-                    I[j] -= 1
+            if(i>iStar):
+                
+                if(D[1][j] == D[1][j-1] + c_del):
+                    # print("element {} {} {}".format(D[1][j],D[1][j-1],I[0][j-1]))
+                    I[1][j] = I[1][j-1]
+                elif(D[1][j] == D[0][j] + c_ins):
+                    # print("element {} {} {}".format(D[1][j],D[0][j],I[0][j]))
+                    I[1][j] = I[0][j]
+                elif(D[1][j] == D[0][j-1] + c_sub(x[i-1],y[j-1])):
+                    # print("element {} {} {}".format(D[1][j],D[0][j-1],I[0][j-1]))
+                    I[1][j] = I[0][j-1]  
 
+                
+        if(i>iStar and i!=n):
+            I[0], I[1] = I[1], I[0]
 
         if(i!=n):
-            # D.pop(0) #remove first row
-            # D.append(listeAjouter.copy) #memory complexity???
+
             D[0], D[1] = D[1], D[0]
+        # print(I[1])    
+
+    return I[1][-1]
+
+def SOL_2(x,y):
+    n = len(x)
+    m = len(y)
+    if (n>1) and (m>=1):
+        i = abs(n)//2
+        j = coupure(x,y)
+        print("la coupure pour x={} y={} i:{} j:{}".format(x,y,i,j))
+        SOL_2(x[0:i],y[0:j])
+        SOL_2(x[i:],y[j:])
 
 
-#coupure("ATTGTA","ATCTTA")
-
-
-
+    else:
+        print("fina; n:{} m:{} {} {}".format(n,m,x,y))
+        if(n==0):
+            for letterY in y:
+                XA.append('-')
+        else:
+            for letterX in x:
+                XA.append(letterX)
+        if(m==0):
+            for letterX in x:
+                YA.append('-')
+        else:
+            for letterY in y:
+                YA.append(letterY)
+            
+# print(coupure("ATTGTA","ATCTTA"))
+SOL_2("ATTGTA","ATCTTA")
+print(XA)
+print(YA)
+print(coupure("T","C"))
 # print(DEST_1(T,x,y))
 # printMatrice(T,x,y)
 
@@ -229,8 +248,9 @@ def coupure(x,y):
 # x,y = readFile("./Inst_0000010_8.adn")
 # DEST_1(x,y)
 
-# DIST_1(x,y)
-# SOL_1(T,x,y)
+# DIST_1("ATTGTA","ATCTTA")
+# print(SOL_1(T,"ATTGTA","ATCTTA"))
+
 # PROG_DYN(x,y)
 # DIST_2(x,y)
 # print(DIST_2(x,y))
