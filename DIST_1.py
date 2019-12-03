@@ -1,22 +1,22 @@
 
 def readFile(p):
     f = open(p, "r")
-    
+
     X=f.readlines()[-2]
     x=[]
     for e in X:
         if(e!=" "):
             x.append(e)
-    
+
     #problem, ne raboti so eden f
-    f.close() 
+    f.close()
     f = open(p, "r")
     Y=f.readlines()[-1]
     y=[]
     for e in Y:
         if(e!=" "):
             y.append(e)
-     
+
     return x[:-1], y[:-1]
 
 
@@ -35,7 +35,7 @@ def printMatrice(T,x,y):
             print(" ", end=" ")
         else:
             print(x[i-1], end=" ")
-            
+
         for j in range(len(T[0])):
             print("%2s" %(T[i][j]),end=' ')
         print(end='\n')
@@ -58,16 +58,16 @@ def DIST_1(x,y):
 
     global T
 
-    T = [[0 for i in range(m+1)] for j in range(n+1)] 
+    T = [[0 for i in range(m+1)] for j in range(n+1)]
 
     T[0][0] = 0
-    
+
     for j in range(1,m+1):
         T[0][j] = c_ins*j
 
     for i in range(1,n+1):
         T[i][0] = c_del*i
-    
+
     for i in range(1, n+1):
         for j in range(1, m+1):
             T[i][j] = min(T[i-1][j] + c_del, T[i][j-1] + c_ins, T[i-1][j-1] + c_sub(x[i-1],y[j-1]))
@@ -83,7 +83,7 @@ def DIST_2(x,y):
     D = [ [ 0 for j in range(len(y)+1)] for i in range(2)]
     for j in range(1,m+1):
         D[0][j] = c_ins*j
-    
+
     for i in range(1,n+1):
         D[1][0] = c_del*i
         for j in range(1,m+1):
@@ -130,7 +130,7 @@ def SOL_1(T,x,y):
         #     ali_y.insert(0, y[j-1])
         #     i=i-1
         #     j=j-1
-    
+
     return ali_x, ali_y
 
 def PROG_DYN(x,y):
@@ -160,7 +160,7 @@ def align_lettre_mot(x,y):
 
     mot_x[indice] = x
     return mot_x, y
-    
+
 XA = []
 YA = []
 
@@ -172,7 +172,7 @@ def coupure(x,y):
     iStar = abs(n) // 2
 
     D = [ [ 0 for j in range(len(y)+1)] for i in range(2)]
-    I = [ [ 0 for j in range(len(y)+1)] for i in range(2)] 
+    I = [ [ 0 for j in range(len(y)+1)] for i in range(2)]
 
     for j in range(1,m+1):
         D[0][j] = c_ins*j
@@ -184,7 +184,7 @@ def coupure(x,y):
         for j in range(1,m+1):
             D[1][j] = min(D[0][j] + c_ins, D[1][j-1] + c_del, D[0][j-1] + c_sub(x[i-1],y[j-1]))
             if(i>iStar):
-                
+
                 if(D[1][j] == D[1][j-1] + c_del):
                     # print("element {} {} {}".format(D[1][j],D[1][j-1],I[0][j-1]))
                     I[1][j] = I[1][j-1]
@@ -193,16 +193,16 @@ def coupure(x,y):
                     I[1][j] = I[0][j]
                 elif(D[1][j] == D[0][j-1] + c_sub(x[i-1],y[j-1])):
                     # print("element {} {} {}".format(D[1][j],D[0][j-1],I[0][j-1]))
-                    I[1][j] = I[0][j-1]  
+                    I[1][j] = I[0][j-1]
 
-                
+
         if(i>iStar and i!=n):
             I[0], I[1] = I[1], I[0]
 
         if(i!=n):
 
             D[0], D[1] = D[1], D[0]
-        # print(I[1])    
+        # print(I[1])
 
     return I[1][-1]
 
@@ -215,8 +215,12 @@ def SOL_2(x,y):
         print("la coupure pour x={} y={} i:{} j:{}".format(x,y,i,j))
         SOL_2(x[0:i],y[0:j])
         SOL_2(x[i:],y[j:])
-
-
+    elif(n==1) and (m>1):
+        a=align_lettre_mot(x,y)
+        for letterX in a[0]:
+            XA.append(letterX)
+        for letterY in y:
+            YA.append(letterY)
     else:
         print("fina; n:{} m:{} {} {}".format(n,m,x,y))
         if(n==0):
@@ -231,12 +235,14 @@ def SOL_2(x,y):
         else:
             for letterY in y:
                 YA.append(letterY)
-            
-# print(coupure("ATTGTA","ATCTTA"))
+
+
+
+#print(coupure("ATTGTA","ATCTTA"))
 SOL_2("ATTGTA","ATCTTA")
 print(XA)
 print(YA)
-print(coupure("T","C"))
+#print(coupure("T","C"))
 # print(DEST_1(T,x,y))
 # printMatrice(T,x,y)
 
