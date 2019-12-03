@@ -72,7 +72,7 @@ def DIST_1(x,y):
         for j in range(1, m+1):
             T[i][j] = min(T[i-1][j] + c_del, T[i][j-1] + c_ins, T[i-1][j-1] + c_sub(x[i-1],y[j-1]))
 
-    printMatrice(T,x,y)
+    #printMatrice(T,x,y)
     return T[n][m]
 
 
@@ -134,12 +134,12 @@ def SOL_1(T,x,y):
     return ali_x, ali_y
 
 def PROG_DYN(x,y):
-    print("x:\n{}\ny:\n{}".format(x,y))
+    #print("x:\n{}\ny:\n{}".format(x,y))
     d = DIST_1(x,y)
-    printMatrice(T,x,y)
-    print("Distance d(x,y) = {}".format(d))
+    #printMatrice(T,x,y)
+    #print("Distance d(x,y) = {}".format(d))
     a_x, a_y = SOL_1(T,x,y)
-    print("Alignement optimal:\n{}\n{}".format(a_x,a_y))
+    #print("Alignement optimal:\n{}\n{}".format(a_x,a_y))
 
 
 def mot_gaps(k):
@@ -214,7 +214,7 @@ def coupure(x,y):
             D[0], D[1] = D[1], D[0]
 
 
-coupure("ATTGTA","ATCTTA")
+#coupure("ATTGTA","ATCTTA")
 
 
 

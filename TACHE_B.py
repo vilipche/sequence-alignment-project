@@ -1,4 +1,4 @@
-from algo_naive import *
+from DIST_1 import *
 import time
 
 
@@ -16,7 +16,5 @@ for ls in listFiles:
     n=len(x)
     m=len(y)
     start_time = time.time()
-    DIST_NAIF(x,y)
+    PROG_DYN(x,y)
     print("{}:{}".format(n, (time.time() - start_time)))
-
-
