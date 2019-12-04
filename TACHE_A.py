@@ -39,15 +39,21 @@ def DIST_NAIF_REC(x,y,i,j,c,dist):
 # print(DIST_NAIF(x,y)) #2
 
 
-
-listFiles = ["Inst_0000010_8", "Inst_0000012_56","Inst_0000013_45","Inst_0000014_7","Inst_0000015_2","Inst_0000020_8","Inst_0000050_3"]
-
+listFiles = ["Inst_0000010_7","Inst_0000010_8","Inst_0000010_44",\
+            "Inst_0000012_13","Inst_0000012_32","Inst_0000012_56",\
+            "Inst_0000013_45","Inst_0000013_56","Inst_0000013_89",\
+            "Inst_0000014_7","Inst_0000014_23","Inst_0000014_83",\
+            "Inst_0000015_2","Inst_0000015_4","Inst_0000015_76",\
+            "Inst_0000020_8","Inst_0000020_17","Inst_0000020_32"]
+# listFiles = ["Inst_0000010_8", "Inst_0000012_56","Inst_0000013_45","Inst_0000014_7","Inst_0000015_2","Inst_0000020_8","Inst_0000050_3","Inst_0000100_3","Inst_0000500_3"]
+#test en moins d'une minute
+print("instance:tailleX:tailleY:seconds")
 for ls in listFiles:
     x,y = readFile("./Instances_genome/"+ls+".adn")
     n=len(x)
     m=len(y)
     start_time = time.time()
     DIST_NAIF(x,y)
-    print("{}:{}".format(n, (time.time() - start_time)))
+    print("{}:\tx:{} y:{}\t{}".format(ls,n,m, (time.time() - start_time)))
 
 
