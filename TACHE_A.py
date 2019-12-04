@@ -7,8 +7,7 @@ def DIST_NAIF(x,y):
         x et y sont deux listes
         retourne la distance des mots x et y
     """
-    # print(x)
-    # print(y)
+
     return DIST_NAIF_REC(x,y,0,0,0,float("inf"))
 
     
@@ -40,18 +39,12 @@ def DIST_NAIF_REC(x,y,i,j,c,dist):
 # x,y = readFile("./Instances_genome/Inst_0000010_8.adn")
 # print(DIST_NAIF(x,y)) #2
 
+#Pour faire des tests sur les instances et les utiliser pour les plots:
 
-listFiles = ["Inst_0000010_7","Inst_0000010_8","Inst_0000010_44",\
-            "Inst_0000012_13","Inst_0000012_32","Inst_0000012_56",\
-            "Inst_0000013_45","Inst_0000013_56","Inst_0000013_89",\
-            "Inst_0000014_7","Inst_0000014_23","Inst_0000014_83",\
-            "Inst_0000015_2","Inst_0000015_4","Inst_0000015_76",\
-            "Inst_0000020_8","Inst_0000020_17","Inst_0000020_32"]
-
-# listFiles = ["Inst_0000010_8", "Inst_0000012_56","Inst_0000013_45","Inst_0000014_7","Inst_0000015_2","Inst_0000020_8","Inst_0000050_3","Inst_0000100_3","Inst_0000500_3"]
-#Test en moins d'une minute
-
-
+# listFiles = ["Inst_0000010_7","Inst_0000010_8","Inst_0000010_44",\
+#             "Inst_0000012_13","Inst_0000012_32","Inst_0000012_56",\
+#             "Inst_0000013_45","Inst_0000013_56","Inst_0000013_89",\
+#             "Inst_0000014_7","Inst_0000014_23","Inst_0000014_83"]
 
 # print("instance:tailleX:tailleY:seconds")
 # for ls in listFiles:
@@ -77,3 +70,9 @@ listFiles = ["Inst_0000010_7","Inst_0000010_8","Inst_0000010_44",\
 # Inst_0000014_7:         x:14 y:12       911.9344797134399
 # Inst_0000014_23:        x:14 y:10       118.05104804039001
 # Inst_0000014_83:        x:14 y:10       116.8823618888855
+
+
+# Pour une instance Inst_0000500_3 on remarque la memoire utilise pour le procesus:
+#   PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                
+#   81 filip      20   0   24260   7176   2864 R 100.0  0.1   0:15.62 python3  
+

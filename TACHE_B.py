@@ -5,6 +5,10 @@ import time
 T=None
 
 def DIST_1(x,y):
+    """
+        x et y deux mots, i indice dans x, j indice dans y
+        creation de la matrice de distance pour les deux lettres en utilisant la variable globale T
+    """
     n=len(x)
     m=len(y)
 
@@ -24,11 +28,13 @@ def DIST_1(x,y):
         for j in range(1, m+1):
             T[i][j] = min(T[i-1][j] + c_del, T[i][j-1] + c_ins, T[i-1][j-1] + c_sub(x[i-1],y[j-1]))
 
-    #printMatrice(T,x,y)
     return T[n][m]
 
 
 def SOL_1(T,x,y):
+    """
+        retourne le meilleur alignement pour les deux mots x et y
+    """
     ali_x = []
     ali_y = []
     i=len(x)
@@ -53,48 +59,43 @@ def SOL_1(T,x,y):
 
 def PROG_DYN(x,y):
     #print("x:\n{}\ny:\n{}".format(x,y))
-    # global T
     d = DIST_1(x,y)
     # printMatrice(T,x,y)
     #print("Distance d(x,y) = {}".format(d))
     a_x, a_y = SOL_1(T,x,y)
-    # print("Alignement optimal:\n{}\n{}".format(a_x,a_y))
+    # print("Alignement optimal:\n{}\n{}".format(a_x,a_y)) 
 
-
+# Pour essayer l'algorithme:
 # x,y = readFile("./Instances_genome/Inst_0000010_7.adn")
-# PROG_DYN(x,y) #2
-
-# listFiles = ["Inst_0000010_7","Inst_0000010_8","Inst_0000010_44",\
-#             "Inst_0000012_13","Inst_0000012_32","Inst_0000012_56",\
-#             "Inst_0000013_45","Inst_0000013_56","Inst_0000013_89",\
-#             "Inst_0000014_7","Inst_0000014_23","Inst_0000014_83",\
-#             "Inst_0000015_2","Inst_0000015_4","Inst_0000015_76",\
-#             "Inst_0000020_8","Inst_0000020_17","Inst_0000020_32"]
-
-X = []
-Y = []
-
-testFilesB = [
-"Inst_0000010_44.adn", \
-"Inst_0000012_13.adn", \
-"Inst_0000013_45.adn", \
-"Inst_0000014_23.adn", \
-"Inst_0000015_2.adn", \
-"Inst_0000020_17.adn", \
-"Inst_0000050_3.adn", \
-"Inst_0000100_3.adn", \
-"Inst_0000500_3.adn", \
-"Inst_0001000_23.adn", \
-"Inst_0002000_3.adn", \
-"Inst_0003000_45.adn", \
-"Inst_0005000_4.adn", \
-"Inst_0008000_32.adn", \
-"Inst_0010000_50.adn", \
-"Inst_0015000_20.adn", \
-"Inst_0020000_5.adn", ]
+# PROG_DYN(x,y) #decommenter l'affichage alignement et printMatrice dans PROG_DYN
 
 
-print("instance:tailleX:tailleY:seconds")
+#Pour faire des tests sur les instances et les utiliser pour les plots:
+
+# X = []
+# Y = []
+
+# testFilesB = [
+# "Inst_0000010_44.adn", \
+# "Inst_0000012_13.adn", \
+# "Inst_0000013_45.adn", \
+# "Inst_0000014_23.adn", \
+# "Inst_0000015_2.adn", \
+# "Inst_0000020_17.adn", \
+# "Inst_0000050_3.adn", \
+# "Inst_0000100_3.adn", \
+# "Inst_0000500_3.adn", \
+# "Inst_0001000_23.adn", \
+# "Inst_0002000_3.adn", \
+# "Inst_0003000_45.adn", \
+# "Inst_0005000_4.adn", \
+# "Inst_0008000_32.adn", \
+# "Inst_0010000_50.adn", \
+# "Inst_0015000_20.adn", \
+# "Inst_0020000_5.adn", ]
+
+
+# print("instance:tailleX:tailleY:seconds")
 # for ls in testFilesB:
 #     x,y = readFile("./Instances_genome/"+ls)
 #     n=len(x)
@@ -106,43 +107,23 @@ print("instance:tailleX:tailleY:seconds")
 #     X.append(n)
 #     Y.append(round(t,4))
 
-for ls in testFilesB:
-    x,y = readFile("./Instances_genome/"+ls)
-    n=len(x)
-    m=len(y)
-    DIST_1(x,y)
-    start_time = time.time()
-    SOL_1(T,x,y)
-    t=round((time.time() - start_time),4)
-    print("x:{};{}".format(n,t))
-    X.append(n)
-    Y.append(round(t,4))
-print(X)
-print(Y)
+# print(X)
+# print(Y)
+
+#pour les tests de question 29
+# for ls in testFilesB:
+#     x,y = readFile("./Instances_genome/"+ls)
+#     n=len(x)
+#     m=len(y)
+#     DIST_1(x,y)
+#     start_time = time.time()
+#     SOL_1(T,x,y)
+#     t=round((time.time() - start_time),4)
+#     print("x:{};{}".format(n,t))
+#     X.append(n)
+#     Y.append(round(t,4))
+
 
 # pour l'instance "Inst_0050000_63.adn" de taille 50 000 avec DIST_1
 #   PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                                                                               
-#20371 3874261   20   0 28,338g 0,028t   4888 R 100,0 90,6   4:35.95 python3                                                                 
-
-
-
-
-testFilesB = ["Inst_0000010_44.adn", \
-"Inst_0000012_13.adn", \
-"Inst_0000013_45.adn", \
-"Inst_0000014_23.adn", \
-"Inst_0000015_2.adn", \
-"Inst_0000020_17.adn", \
-"Inst_0000050_3.adn", \
-"Inst_0000100_3.adn", \
-"Inst_0000500_3.adn", \
-"Inst_0001000_23.adn", \
-"Inst_0002000_3.adn", \
-"Inst_0003000_45.adn", \
-"Inst_0005000_4.adn", \
-"Inst_0008000_32.adn", 
-"Inst_0010000_50.adn", \
-"Inst_0015000_20.adn", \
-"Inst_0020000_5.adn", \
-"Inst_0050000_63.adn", \
-"Inst_0100000_11.adn"]
+# 20371 3874261   20   0 28,338g 0,028t   4888 R 100,0 90,6   4:35.95 python3                                                                

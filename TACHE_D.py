@@ -5,6 +5,9 @@ import time
 XA=[]
 YA=[]
 def SOL_2(x,y):
+    """
+        fonction divide and conquer qui utilise la coupure pour trouver le meilleur alignement de x et y
+    """
     n = len(x)
     m = len(y)
     if (n>1) and (m>=1):
@@ -36,9 +39,15 @@ def SOL_2(x,y):
 
 
 def mot_gaps(k):
+    """
+        retourne la creation de mot "vide"
+    """
     return ['-'] * k
 
 def align_lettre_mot(x,y):
+    """
+        le meilleur alignement si x est de taille 1 et y est non vide.
+    """
     mot_x = mot_gaps(len(y))
     cout = float("inf")
     indice = 0
@@ -55,6 +64,9 @@ def align_lettre_mot(x,y):
     return mot_x, y
 
 def coupure(x,y):
+    """
+        fonction qui retourne la coupure j* pour les deux mots x et y d'apres i*
+    """
     n = len(x)
     m = len(y)
     iStar = abs(n) // 2
@@ -94,53 +106,59 @@ def coupure(x,y):
 
     return I[1][-1]
 
-
-testFilesD = [
-"Inst_0000010_44.adn", \
-"Inst_0000012_13.adn", \
-"Inst_0000013_45.adn", \
-"Inst_0000014_23.adn", \
-"Inst_0000015_2.adn", \
-"Inst_0000020_17.adn", \
-"Inst_0000050_3.adn", \
-"Inst_0000100_3.adn", \
-"Inst_0000500_3.adn", \
-"Inst_0001000_23.adn", \
-"Inst_0002000_3.adn", \
-"Inst_0003000_45.adn", \
-"Inst_0005000_4.adn", \
-"Inst_0008000_32.adn", \
-"Inst_0010000_50.adn", \
-"Inst_0015000_20.adn", \
-"Inst_0020000_5.adn", ]
-
-X=[]
-Y=[]
-for ls in testFilesD:
-    x,y = readFile("./Instances_genome/"+ls)
-    n=len(x)
-    m=len(y)
-    start_time = time.time()
-    SOL_2(x,y)
-    t=round((time.time() - start_time),4)
-    print("x:{};{}".format(n,t))
-    X.append(n)
-    Y.append(round(t,4))
-
-print(X)
-print(Y)
-
-
-#TACHE_D 
-#apres 7 minutes jqa de instance 10 a 10 000 SOL_2 
-#22403 3874261   20   0   26876  10148   4924 R 100,0  0,0   7:17.14 python3  
-#SOL_1 apres  2 minutes de instance 10 a 10 000 SOL_1                                                           
-#22782 3874261   20   0 2707556 2,549g   4836 R  99,7  8,2   1:56.23 python3                                                                 
-                                                          
-
+#Pour tester l'algo 
 # print(coupure("ATTGTA","ATCTTA"))
 # SOL_2("ATTGTA","ATCTTA")
 # print(XA)
 # print(YA)
+
+#Pour faire des tests sur les instances et les utiliser pour les plots:
+
+# testFilesD = [
+# "Inst_0000010_44.adn", \
+# "Inst_0000012_13.adn", \
+# "Inst_0000013_45.adn", \
+# "Inst_0000014_23.adn", \
+# "Inst_0000015_2.adn", \
+# "Inst_0000020_17.adn", \
+# "Inst_0000050_3.adn", \
+# "Inst_0000100_3.adn", \
+# "Inst_0000500_3.adn", \
+# "Inst_0001000_23.adn", \
+# "Inst_0002000_3.adn", \
+# "Inst_0003000_45.adn", \
+# "Inst_0005000_4.adn", \
+# "Inst_0008000_32.adn", \
+# "Inst_0010000_50.adn", \
+# "Inst_0015000_20.adn", \
+# "Inst_0020000_5.adn", ]
+
+# X=[]
+# Y=[]
+# for ls in testFilesD:
+#     x,y = readFile("./Instances_genome/"+ls)
+#     n=len(x)
+#     m=len(y)
+#     start_time = time.time()
+#     SOL_2(x,y)
+#     t=round((time.time() - start_time),4)
+#     print("x:{};{}".format(n,t))
+#     X.append(n)
+#     Y.append(round(t,4))
+
+# print(X)
+# print(Y)
+
+
+#TACHE_D 
+#apres 7 minutes jqa de instance 10 a 10 000 SOL_2 
+#   PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND    
+# 22403 3874261   20   0   26876  10148   4924 R 100,0  0,0   7:17.14 python3  
+#SOL_1 apres  2 minutes de instance 10 a 10 000 SOL_1 
+#   PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                           
+# 22782 3874261   20   0 2707556 2,549g   4836 R  99,7  8,2   1:56.23 python3                                                                 
+                                                          
+
+
 
 

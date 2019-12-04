@@ -1,6 +1,8 @@
 import itertools
 
-
+"""
+    C'est une implementation de la question 4 en python pour essayer si notre formule marche.
+"""
 
 def nb_alignements_possibles(x,y,k_x):
     """
