@@ -1,5 +1,7 @@
 from macros import *
 from tools import *
+import time
+
 XA=[]
 YA=[]
 def SOL_2(x,y):
@@ -8,7 +10,7 @@ def SOL_2(x,y):
     if (n>1) and (m>=1):
         i = abs(n)//2
         j = coupure(x,y)
-        print("la coupure pour x={} y={} i:{} j:{}".format(x,y,i,j))
+        # print("la coupure pour x={} y={} i:{} j:{}".format(x,y,i,j))
         SOL_2(x[0:i],y[0:j])
         SOL_2(x[i:],y[j:])
     elif(n==1) and (m>1):
@@ -18,7 +20,7 @@ def SOL_2(x,y):
         for letterY in y:
             YA.append(letterY)
     else:
-        print("fina; n:{} m:{} {} {}".format(n,m,x,y))
+        # print("fina; n:{} m:{} {} {}".format(n,m,x,y))
         if(n==0):
             for letterY in y:
                 XA.append('-')
@@ -93,7 +95,67 @@ def coupure(x,y):
     return I[1][-1]
 
 
-print(coupure("ATTGTA","ATCTTA"))
-SOL_2("ATTGTA","ATCTTA")
-print(XA)
-print(YA)
+testFilesD = [
+"Inst_0000010_44.adn", \
+"Inst_0000012_13.adn", \
+"Inst_0000013_45.adn", \
+"Inst_0000014_23.adn", \
+"Inst_0000015_2.adn", \
+"Inst_0000020_17.adn", \
+"Inst_0000050_3.adn", \
+"Inst_0000100_3.adn", \
+"Inst_0000500_3.adn", \
+"Inst_0001000_23.adn", \
+"Inst_0002000_3.adn", \
+"Inst_0003000_45.adn", \
+"Inst_0005000_4.adn", \
+"Inst_0008000_32.adn", \
+"Inst_0010000_50.adn", \
+"Inst_0015000_20.adn", \
+"Inst_0020000_5.adn", ]
+
+X=[]
+Y=[]
+for ls in testFilesD:
+    x,y = readFile("./Instances_genome/"+ls)
+    n=len(x)
+    m=len(y)
+    start_time = time.time()
+    SOL_2(x,y)
+    t=round((time.time() - start_time),4)
+    print("x:{};{}".format(n,t))
+    X.append(n)
+    Y.append(round(t,4))
+
+print(X)
+print(Y)
+# SOL_2
+# x:10;0.0001
+# x:12;0.0002
+# x:13;0.0002
+# x:14;0.0002
+# x:15;0.0003
+# x:20;0.0006
+# x:50;0.003
+# x:100;0.0107
+# x:500;0.2643
+# x:1000;1.109
+# x:2000;4.6042
+# x:3000;10.4477
+# x:5000;29.1532
+# x:8000;76.1142
+# x:10000;119.6985
+
+#TACHE_D 
+#apres 7 minutes jqa de instance 10 a 10 000 SOL_2 
+#22403 3874261   20   0   26876  10148   4924 R 100,0  0,0   7:17.14 python3  
+#SOL_1 apres  2 minutes de instance 10 a 10 000 SOL_1                                                           
+#22782 3874261   20   0 2707556 2,549g   4836 R  99,7  8,2   1:56.23 python3                                                                 
+                                                          
+
+# print(coupure("ATTGTA","ATCTTA"))
+# SOL_2("ATTGTA","ATCTTA")
+# print(XA)
+# print(YA)
+
+
